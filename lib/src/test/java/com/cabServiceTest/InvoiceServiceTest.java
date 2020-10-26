@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 import com.cabInvoiceGenrator.InvoiceGenerator;
+import com.cabInvoiceGenrator.InvoiceSummary;
 import com.cabInvoiceGenrator.Ride;
 
 public class InvoiceServiceTest {
@@ -26,11 +27,13 @@ public class InvoiceServiceTest {
 		assertEquals(5, fare);
 	}
 	@Test
-	public void givenDifferentRides_shouldReturnTotalFare() {
-		InvoiceGenerator invoiceGenerator = new InvoiceGenerator();
+	public void givenDifferentRides_shouldReturnInvoiceSummary() {
 		Ride[] rides = { new Ride(3.0, 5),
 				         new Ride(0.1, 2)
 		               };
-		assertEquals(40, invoiceGenerator.calculateFare(rides), 0.0);	
+		InvoiceGenerator invoiceGenerator = new InvoiceGenerator();
+		InvoiceSummary invoiceSummary = invoiceGenerator.calculateFare(rides);
+		InvoiceSummary excpectedInvoiceSummary = new InvoiceSummary(2, 40.0);
+		assertEquals(excpectedInvoiceSummary,invoiceSummary);	
 	}
 }
