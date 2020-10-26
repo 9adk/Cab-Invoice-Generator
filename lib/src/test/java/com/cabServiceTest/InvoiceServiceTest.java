@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 import com.cabInvoiceGenrator.InvoiceGenerator;
+import com.cabInvoiceGenrator.Ride;
 
 public class InvoiceServiceTest {
 	@Test
@@ -24,5 +25,12 @@ public class InvoiceServiceTest {
 		double fare = invoiceGenerator.calculateFare(distance, time);
 		assertEquals(5, fare);
 	}
-	
+	@Test
+	public void givenDifferentRides_shouldReturnTotalFare() {
+		InvoiceGenerator invoiceGenerator = new InvoiceGenerator();
+		Ride[] rides = { new Ride(3.0, 5),
+				         new Ride(0.1, 2)
+		               };
+		assertEquals(40, invoiceGenerator.calculateFare(rides), 0.0);	
+	}
 }
