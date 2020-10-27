@@ -17,9 +17,14 @@ public class RideRepository {
 		if (ridesList == null) {
 			this.userRides.put(userId, new ArrayList<>(Arrays.asList(rides)));
 		}
+		else {
+			this.userRides.get(userId).addAll(Arrays.asList(rides));
+		}
 	}
 
 	public Ride[] getRides(String userId) {
-		return this.userRides.get(userId).toArray(new Ride[0]);
+		ArrayList<Ride> ridesList = this.userRides.get(userId);
+		Ride[] ride = ridesList.toArray(new Ride[ridesList.size()]);
+		return ride;
 	}
 }
